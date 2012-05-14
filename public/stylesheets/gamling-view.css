@@ -1,0 +1,219 @@
+.viewer{
+	width: 310px;
+	padding: 6px 0;
+	margin: 0 auto;
+
+	/* CSS3 */
+	-webkit-box-shadow: 0 0px 8px rgba(0,0,0,.4);
+	-moz-box-shadow: 0 0px 8px rgba(0,0,0,.4);
+	box-shadow: 0 0px 8px rgba(0,0,0,.4);
+}
+.map-snapshot{
+	width: 310px;
+	height: 180px;
+	
+}
+.viewer-unit{
+	position: relative;
+	width: 310px;
+	margin: 10px 0;
+	list-style: none;
+	padding: 0;
+}
+.viewer-unit>span{
+	float: left;
+	width: 290px;
+	margin: 5px 5px 5px 6px;
+	padding: 3px;
+	border: 2px solid #FFF;
+	background-color: #FFF;
+	
+	/* CSS3 */
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.viewer-unit .disease{
+	float: left;
+	height: 44px;
+}
+.viewer-unit>span:hover{
+	border: 2px solid #AAA;
+}
+.viewer-unit h1{
+	float: left;
+	font: normal bold 1em/1.4em 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	width:284px;
+	color: #444;
+	margin: 5px;
+	padding: 5px 0px;
+	border-bottom: 1px solid #DDD;
+	border-top: 1px solid #DDD;
+}
+.viewer-unit h2{
+	float: left;
+	font: normal 200 .9em/1.4em 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	width:284px;
+	color: #888;
+	margin: 5px;
+	padding: 0 0 5px 0px;
+	border-bottom: 1px solid #DDD;
+}
+.viewer-unit h3{
+	float: left;
+	font: normal bold 1em/2em 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	width:284px;
+	color: #bf3135;
+	margin: 8px 5px;
+	padding: 5px 0px;
+	border-bottom: 4px solid #CCC;
+	background-color: #EEE;
+	text-shadow: 1px 1px 0px #FFF;
+}
+.viewer-unit h3 em{
+	font: normal bold .8em/2em 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	color: #888;
+	margin: 8px 5px;
+	padding: 5px 0px;
+}
+.viewer-unit h4{
+	font: normal 200 10px/18px 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	float: right;
+	/*width:120px;*/
+	color: #888;
+	margin: 0;
+	padding: 0;
+	text-align: right;
+	overflow: hidden;
+}
+.estate_detail{
+	width:170px;	
+	height: 18px;
+	float: left;
+}
+.estate_detail p{
+	float: left;
+	font: normal 800 .8em/18px 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	color: #4895cf;
+	margin: 0 8px 0 2px;
+}
+.bathroom-icon, .bedroom-icon, .parking-icon, .pet-icon, .wifi-icon, .furniture-icon,
+.bathroom-icon.no, .bedroom-icon.no, .parking-icon.no, .pet-icon.no, .wifi-icon.no, .furniture-icon.no{
+	float: left;
+	height: 18px;
+	width: 18px;
+	display: block;
+}
+.viewer-unit .bathroom-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat 0px 0px;
+}
+.viewer-unit .bedroom-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat -18px 0px;
+}
+.viewer-unit .parking-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat -36px 0px;
+}
+.viewer-unit .pet-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat -54px 0px;
+}
+.viewer-unit .wifi-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat -72px 0px;
+}
+.viewer-unit .furniture-icon{
+	background: url('../images/viewer_icon.jpg') no-repeat -90px 0px;
+}
+
+.viewer-unit .bathroom-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat 0px -18px;
+}
+.viewer-unit .bedroom-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat -18px -18px;
+}
+.viewer-unit .parking-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat -36px -18px;
+}
+.viewer-unit .pet-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat -54px -18px;
+}
+.viewer-unit .wifi-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat -72px -18px;
+}
+.viewer-unit .furniture-icon.no{
+	background: url('../images/viewer_icon.jpg') no-repeat -90px -18px;
+}
+
+.viewer-unit>span>h5{
+	float: left;
+	font: normal bold 1em/28px 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	width: 28px;
+	height: 28px;
+	color: #FFF;
+	margin: 10px 5px;
+	padding: 8px;
+	display: inline;
+	background-color: #4895cf;
+	text-align: center;
+	text-shadow: 1px 1px 0px rgba(0, 0, 0, .4);
+	
+	/* CSS3 */
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+}
+.viewer-unit .share{
+	float: right;
+	height: 18px;
+	margin: 15px 5px;
+	padding: 8px;
+	border: 1px solid #CCC;
+	background-color: #EEE;
+}
+.viewer-unit .share>span{
+	float: left;
+	width: 16px;
+	height: 16px;
+	margin: 1px 4px;	
+}
+.viewer-unit .share .facebook{
+	background: url('../images/tool-icon.png') no-repeat 0px 0px;
+}
+.viewer-unit .share .facebook:hover{
+	background: url('../images/tool-icon.png') no-repeat 0px -16px;
+}
+.viewer-unit .share .twitter{
+	background: url('../images/tool-icon.png') no-repeat -16px 0px;
+}
+.viewer-unit .share .twitter:hover{
+	background: url('../images/tool-icon.png') no-repeat -16px -16px;
+}
+.viewer-unit .share .edit{
+	background: url('../images/tool-icon.png') no-repeat -32px 0px;
+}
+.viewer-unit .share .edit:hover{
+	background: url('../images/tool-icon.png') no-repeat -32px -16px;
+}
+.viewer-unit .share .delete{
+	background: url('../images/tool-icon.png') no-repeat -48px 0px;
+}
+.viewer-unit .share .delete:hover{
+	background: url('../images/tool-icon.png') no-repeat -48px -16px;
+}
+.viewer-unit .share .add{
+	background: url('../images/tool-icon.png') no-repeat -64px 0px;
+}
+.viewer-unit .share .add:hover{
+	background: url('../images/tool-icon.png') no-repeat -64px -16px;
+}
+
+.viewer-unit>span>img{
+	width:278px;
+	border: 4px solid #c0c0bc;
+	margin: 10px 0;
+}
+.viewer-unit>span>p{
+	font: normal 200 .8em/1.6em 'Droid Sans',Verdana, Arial, Helvetica, sans-serif;
+	width:284px;
+	color: #888;
+	margin: 8px 5px;
+	text-shadow: 1px 1px 0px #FFF;
+}

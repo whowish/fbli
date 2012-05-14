@@ -1,0 +1,97 @@
+<div id="form_container">   
+	<h1><%==word_for(:register)%></h1>
+	<h2> 
+		<%==word_for :confirm_register_for,:email=>params[:email].downcase%> 
+	</h2>
+	<span class="form_unit">
+		<input type="password" class="textbox_input" id="confirm_form_password" placeholder="<%=word_for_attr :password%>" >
+		<span id="first_passwordErrorPanel" class="textbox_explane" >
+			<p class="tip">
+				<%=word_for(:first_password_instruction)%>
+			</p>
+		</span>
+	</span>
+	<span class="form_unit">
+		<input type="password" class="textbox_input" id="confirm_form_confirm_password" placeholder="<%=word_for_attr :confirm_password%>">
+		<span id="passwordErrorPanel" class="textbox_explane" >
+			<p class="tip">
+				<%=word_for(:password_instruction)%>
+			</p>
+		</span>
+	</span>
+	<span class="form_unit">
+		<input type="text" class="textbox_input" id="confirm_form_name" placeholder="<%=word_for_attr :name%>" >
+		<span id="nameErrorPanel" class="textbox_explane">
+			<p class="tip">
+				<%=word_for(:name_instruction)%>
+			</p>
+		</span>
+	</span>
+	<span class="form_unit">
+		<input type="text" class="textbox_input" id="confirm_form_work_place" placeholder="<%=word_for_attr :work_place%>">
+		<span id="workplaceErrorPanel" class="textbox_explane">
+			<p class="tip">
+				<%=word_for(:work_place_instruction)%>
+			</p>
+		</span>
+	</span>
+	<span class="form_unit">
+		<span>
+			<span class="button green" style="float:left;" onclick="confirm_form_handler.submit(this);">
+				<%=word_for(:submit)%>
+			</span>
+			<span id="errorPanel" class="textbox_explane">
+				
+			</span>
+		</span>
+	</span>
+</div>
+
+<input type="hidden" value="<%=params[:email]%>" id="confirm_form_email"/>
+<input type="hidden" value="<%=params[:unique_key]%>" id="confirm_form_unique_key"/>
+
+<%=javascript_include_tag "/javascripts/email_registration/confirm_form.js"%>
+<script language="javascript">
+	
+	function match_password() {
+		return ($('#confirm_form_password').val() == $('#confirm_form_confirm_password').val())
+	}
+	
+	
+	var confirm_form_validator = new validator("errorPanel");
+																								
+	confirm_form_validator.register_validation("password",
+												"confirm_form_confirm_password",
+												"passwordErrorPanel",
+												"",
+												[{
+													f: validator_helper.presence,
+													m: "<%=global_word_for('confirm_form','password_presence')%>"
+												},
+												{
+													f: match_password,
+													m: "<%=global_word_for('confirm_form','password_not_matched')%>"
+												}]);
+												
+	confirm_form_validator.register_validation("name",
+												"confirm_form_name",
+												"nameErrorPanel",
+												"",
+												[{
+													f: validator_helper.presence,
+													m: "<%=global_word_for('confirm_form','name_presence')%>"
+												}]);
+
+	confirm_form_validator.register_validation("work_place",
+												"confirm_form_work_place",
+												"workplaceErrorPanel",
+												"",
+												[{
+													f: validator_helper.presence,
+													m: "<%=global_word_for('confirm_form','work_place_presence')%>"
+												}]);
+
+
+</script>
+	
+

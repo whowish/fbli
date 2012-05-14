@@ -1,0 +1,49 @@
+<ul id="main_menu">
+	<li>
+		<span id="filter_panel" class="filter" style="position:relative;">
+			<span id="filter_button" class="pop_panel_button" style="position:relative;width:44px;height:44px;display:block;">
+			</span>
+			<span id="filter_hover" style="display:none;">
+				<span id="filter_button_pop" class="pop_panel_button" style="position:relative;width:44px;height:44px;display:block;">
+				
+				</span>
+				<span style="display:block;position:absolute;left:-18px;top:0px;">
+					<%=render :partial=>"/home/filter"%>
+				</span>
+			</span>
+		</span>
+	</li>
+	<li><span class="add" title="<%=word_for_attr :add%>" onclick="global_flood.to_add_mode();"></span></li>
+	<li><span class="search" title="<%=word_for_attr :search%>" onclick="global_flood.to_search_mode();"></span></li>
+	<li><span class="info" title="<%=word_for_attr :info%>" onclick="global_flood.to_info_page();"></span></li>
+	<li><span class="profile" title="<%=word_for_attr :profile%>" onclick="location.href='/member/profile';"></span></li>
+	<%
+		if @member.is_admin
+	%>
+		<li><span class="admin" title="<%=word_for_attr :admin_member%>" onclick="location.href='/admin_member';"></span></li>
+	<%
+		end
+	%>
+	
+	<%
+		if @member.is_member
+	%>
+		<li><span class="logout" title="<%=word_for_attr :logout%>" onclick="location.href='/logout';"></span></li>
+	<%
+		end
+	%>
+</ul>
+<ul id="add_menu" style="display:none;">
+	<li><span class="next" onclick="global_flood.to_add_page();"></span></li>
+	<li><span class="cancel" onclick="global_flood.to_normal_mode();"></span></li>
+</ul>
+<ul id="search_menu" style="display:none;">
+	<li><input id="search_address" type="text" placeholder="<%=word_for_attr :default_search_text%>"></li>
+	<li><span class="cancel" onclick="global_flood.to_normal_mode();"></span></li>
+</ul>
+
+<script type="text/javascript">
+	$(function() {
+	    $("#filter_panel").pop_panel();
+	});
+</script>

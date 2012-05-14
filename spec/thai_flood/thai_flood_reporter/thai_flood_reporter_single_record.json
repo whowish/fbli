@@ -1,0 +1,54 @@
+{
+  "completed_in": 0.175,
+  "max_id": 132360883014877184,
+  "max_id_str": "132360883014877184",
+  "next_page": "?page=2&max_id=132360883014877184&q=%23thaiflood%20maps.google&rpp=5&include_entities=1&with_twitter_user_id=1",
+  "page": 1,
+  "query": "%23thaiflood+maps.google",
+  "refresh_url": "?since_id=132360883014877184&q=%23thaiflood%20maps.google&include_entities=1&with_twitter_user_id=1",
+  "results": [
+    {
+      "created_at": "Fri, 04 Nov 2011 07:37:48 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              77,
+              87
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/2hewMNvr",
+            "expanded_url": "http://bit.ly/rtea6G",
+            "display_url": "bit.ly/rtea6G",
+            "indices": [
+              88,
+              108
+            ]
+          }
+        ]
+      },
+      "from_user": "ployzaa202",
+      "from_user_id": 223373468,
+      "from_user_id_str": "223373468",
+      "geo": null,
+      "id": 132360883014877184,
+      "id_str": "132360883014877184",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a1.twimg.com/profile_images/1601037919/299049_266402913390686_100000629379558_871503_870965108_n_normal.jpg",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:37น.] ถนนวัชรพล ท่าแร้ง บางเขน กรุงเทพมหานคร \"น้ำท่วม-ห้ามรถเล็ก\" #ThaiFlood http://t.co/2hewMNvr",
+      "to_user_id": null,
+      "to_user_id_str": null
+    }
+  ],
+  "results_per_page": 5,
+  "since_id": 0,
+  "since_id_str": "0"
+}

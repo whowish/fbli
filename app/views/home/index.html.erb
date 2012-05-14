@@ -1,0 +1,80 @@
+<%
+	content_for(:javascript_files) do
+%>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&language=<%=@locale%>&region=TH" type="text/javascript"></script>
+	<%= javascript_include_tag "application.js" %>
+	<%= javascript_include_tag "map.js" %>
+	<%= javascript_include_tag "view.js" %>
+	
+	<script type="text/javascript">
+		$(function() { 
+
+<%
+	if @last_location
+%>
+			global_flood.initialize_map(<%=@zoom%>, <%=@last_location[0]%>, <%=@last_location[1]%>);
+<%
+	else
+%>		
+			global_flood.initialize_map(<%=@zoom%>);
+<%
+	end
+%>	
+			$("#search_address").keyup(function(event){
+				if(event.keyCode == 13){
+					global_flood.search_for($(this).val());
+				}
+			});
+
+		});
+	</script>
+
+<%
+	end
+%>
+<%
+	content_for(:header) do
+%>
+	<%=render :partial=>"home/header"%>
+<%
+	end
+%>
+<script type="text/javascript">
+	_gaq.push(['_trackPageview','/']);
+	piwikTracker.setDocumentTitle("/");
+	piwikTracker.trackPageView();
+</script>
+<div id="map">
+</div>
+<div id="dialog"  title="" style="display:none;width:320px;">
+	<span id="dialog_content">
+		
+	</span>
+</div>
+<script type="text/javascript">
+	$('#dialog').dialog({ autoOpen: false, 
+						width:320,
+						resizable: false,
+						modal: false,
+						position: 'top',
+						draggable: false,
+						open: function(event, ui) {
+							var overlays = $(".ui-widget-overlay");
+							
+							if (overlays.length == 0) {
+								$('body').append("<div class='ui-widget-overlay' style='display:none;'></div>");
+							}
+							
+							$(".ui-widget-overlay").show();
+						},
+						close : function(event, ui) {
+							$(".ui-widget-overlay").hide();
+						}
+					  });
+					  
+	$('.ui-widget-overlay').live('click', function() {
+		$('#dialog').dialog( "close" );
+	});
+	
+</script>
+

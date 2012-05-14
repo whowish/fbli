@@ -1,0 +1,47 @@
+<script type="text/javascript">
+	_gaq.push(['_trackPageview', '/help']);
+	piwikTracker.setDocumentTitle("/help");
+	piwikTracker.trackPageView();
+</script>
+<span class="dialogContent helpPage">
+	<h1>
+		<%=word_for :title%>
+	</h1>
+	<p>&nbsp;&nbsp;&nbsp; <%=word_for :description%></p>
+	<ul class="helpMenu">
+		<!--<li>
+			<span class="helpMenuHeader menuHeaderPink"><%=word_for :other_language%></span>
+			<span class="helpMenuContent" style="text-align:center;">
+				<a href="/?locale=th">
+					<img src="/images/flag/flag_thailand.png">
+				</a>
+				<a href="/?locale=en">
+					<img src="/images/flag/flag_great_britain.png">
+				</a>
+				<a href="/?locale=jp">
+					<img src="/images/flag/flag_japan.png">
+				</a>
+			</span>
+		</li>-->
+		<li>
+			<span class="helpMenuHeader menuHeaderBlue"><%=word_for :icon_instruction%></span>
+			<ul class="dropdown">
+				<li><img src="http://www.google.com/intl/en_us/mapfiles/ms/icons/green-dot.png"><span><%=word_for :chikungunya_new%></span></li>
+				<li><img src="http://www.google.com/intl/en_us/mapfiles/ms/icons/orange-dot.png"><span><%=word_for :dengue_new%></span></li>
+				<li><img src="http://www.google.com/intl/en_us/mapfiles/ms/icons/red-dot.png"><span><%=word_for :malaria_new%></span></li>
+				<li><img src="http://www.google.com/intl/en_us/mapfiles/ms/icons/blue-dot.png"><span><%=word_for :lepto_new%></span></li>
+			</ul>
+		</li>
+		<li>
+			<span class="helpMenuHeader menuHeaderPink"><%=word_for :about%></span>
+			<span class="helpMenuContent" style="text-align:center;">
+				<a href="/about" target="gamling_creators">
+					<img class="about" src="/images/us_small.jpg">
+				</a><br/>
+				<a href="/help/term" target="gamling_term">
+					<%=word_for :term%>
+				</a>
+			</span>
+		</li>
+	</ul>
+</span>

@@ -1,0 +1,69 @@
+# encoding: utf-8
+require 'spec_helper'
+Dir[Rails.root.join("db/migrate/**/*.rb")].each {|f| require f}
+
+describe "AddPostGroupId" do
+
+  it "assigns groups" do
+    
+    member = FacebookMember.create(:facebook_id=>"12345",:name=>"TestMember")
+    
+    post = Post.create(:location=> [30.0002, 100.0001],
+                        :image => "",
+                        :message => "msg",
+                        :place => "place",
+                        :water_height => 100,
+                        :member_id => member.id
+                        )
+    post.set(:post_group_id, nil)
+    commit_database
+  
+    groups = PostGroup.all
+    groups.length.should == 1
+    groups[0].location[0].should == 30.0000
+    groups[0].location[1].should == 100.0000
+    
+    AddPostGroupId.up
+    
+    commit_database
+    
+    post = Post.find(post.id)
+    post.post_group_id.should == groups[0].id
+    
+  end
+  
+  
+  it "creates groups" do
+    
+    member = FacebookMember.create(:facebook_id=>"12345",:name=>"TestMember")
+    
+    post = Post.create(:location=> [30.0002, 100.0001],
+                        :image => "",
+                        :message => "msg",
+                        :place => "place",
+                        :water_height => 100,
+                        :member_id => member.id
+                        )
+    post.set(:post_group_id, nil)
+    
+    groups = PostGroup.all
+    groups.destroy
+    
+    commit_database
+  
+    AddPostGroupId.up
+    
+    commit_database
+    
+    groups = PostGroup.all
+    groups.length.should == 1
+    groups[0].location[0].should == 30.0000
+    groups[0].location[1].should == 100.0000
+    
+    post = Post.find(post.id)
+    post.post_group_id.should == groups[0].id
+    
+    
+  end
+  
+end

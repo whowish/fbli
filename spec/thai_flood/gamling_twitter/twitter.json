@@ -1,0 +1,151 @@
+{
+  "completed_in": 0.124,
+  "max_id": 132365007949271041,
+  "max_id_str": "132365007949271041",
+  "page": 1,
+  "query": "%23gamlingorg",
+  "refresh_url": "?since_id=132365007949271041&q=%23gamlingorg&include_entities=1&with_twitter_user_id=1",
+  "results": [
+    {
+      "created_at": "Fri, 04 Nov 2011 07:54:11 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "gamlingorg",
+            "indices": [
+              0,
+              11
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/JkmliJ52",
+            "expanded_url": "http://twitgoo.com/4tjybp",
+            "display_url": "twitgoo.com/4tjybp",
+            "indices": [
+              19,
+              39
+            ]
+          }
+        ]
+      },
+      "from_user": "tanin47",
+      "from_user_id": 290587161,
+      "from_user_id_str": "290587161",
+      "geo": {
+        "coordinates": [
+          13.737,
+          100.5847
+        ],
+        "type": "Point"
+      },
+      "id": 132365007949271041,
+      "id_str": "132365007949271041",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1472399464/Picture_5__normal.jpg",
+      "source": "&lt;a href=&quot;http://twitter.com/#!/download/iphone&quot; rel=&quot;nofollow&quot;&gt;Twitter for iPhone&lt;/a&gt;",
+      "text": "#gamlingorg ไมท่วม http://t.co/JkmliJ52",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:52:27 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "gamlingorg",
+            "indices": [
+              0,
+              11
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/2m7OYEEx",
+            "expanded_url": "http://lockerz.com/s/153098132",
+            "display_url": "lockerz.com/s/153098132",
+            "indices": [
+              20,
+              40
+            ]
+          }
+        ]
+      },
+      "from_user": "tanin47",
+      "from_user_id": 290587161,
+      "from_user_id_str": "290587161",
+      "geo": {
+        "coordinates": [
+          13.737,
+          100.5847
+        ],
+        "type": "Point"
+      },
+      "id": 132364570210742272,
+      "id_str": "132364570210742272",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1472399464/Picture_5__normal.jpg",
+      "source": "&lt;a href=&quot;http://twitter.com/#!/download/iphone&quot; rel=&quot;nofollow&quot;&gt;Twitter for iPhone&lt;/a&gt;",
+      "text": "#gamlingorg ไม่ท่วม http://t.co/2m7OYEEx",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:44:47 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "gamlingorg",
+            "indices": [
+              0,
+              11
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/N8UkTfvX",
+            "expanded_url": "http://yfrog.com/h3ebyaxnj",
+            "display_url": "yfrog.com/h3ebyaxnj",
+            "indices": [
+              20,
+              40
+            ]
+          }
+        ]
+      },
+      "from_user": "tanin47",
+      "from_user_id": 290587161,
+      "from_user_id_str": "290587161",
+      "geo": {
+        "coordinates": [
+          13.7369,
+          100.5848
+        ],
+        "type": "Point"
+      },
+      "id": 132362639962677248,
+      "id_str": "132362639962677248",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1472399464/Picture_5__normal.jpg",
+      "source": "&lt;a href=&quot;http://twitter.com/#!/download/iphone&quot; rel=&quot;nofollow&quot;&gt;Twitter for iPhone&lt;/a&gt;",
+      "text": "#gamlingorg ไม่ท่วม http://t.co/N8UkTfvX",
+      "to_user_id": null,
+      "to_user_id_str": null
+    }
+  ],
+  "results_per_page": 5,
+  "since_id": 0,
+  "since_id_str": "0"
+}

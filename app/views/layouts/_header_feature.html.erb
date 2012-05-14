@@ -1,0 +1,10 @@
+<ul>
+	<li><span class="home" title="<%=word_for_attr :map%>" onclick="location.href='<%=@home_url%>';"></span></li>
+	<%
+		if @member
+	%>
+		<li><span class="logout" title="<%=word_for_attr :logout%>" onclick="location.href='/logout';"></span></li>
+	<%
+		end
+	%>
+</ul>

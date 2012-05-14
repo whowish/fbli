@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>แก้มลิง</title>
+        <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+		
+		<link rel="stylesheet" href="../stylesheets/gamling_v2.css" type="text/css">
+		<link rel="stylesheet" href="../stylesheets/signup.css" type="text/css">
+		<link rel="stylesheet" href="../stylesheets/button.css" type="text/css">
+		
+</head>
+<body>
+	<div id="header">
+		<div id="navigator">
+			<ul id="main_menu">
+				<li><span id="filter_button" class="filter" title="ดูเฉพาะสีแดงและสีส้ม" onclick="global_flood.toggle_filter(this);"></span>
+				</li>
+				<li><span class="add" title="ส่งข่าวใหม่" onclick="global_flood.to_add_mode();"></span></li>
+				<li><span class="search" onclick="global_flood.to_search_mode();"></span></li>
+				<li><span class="info" title="ข้อมูลอื่น ๆ" onclick="global_flood.to_info_page();"></span></li>
+				<li>
+					<a style="margin-top:12px;" class="button-01 gray" href="/activate_whowish_word?activate=yes">w</a>
+				</li>
+			</ul>
+		</div>
+		
+	</div>
+
+	<div id="wrapper" class="clearfix">
+		<div id="container">
+			<div id="form_container">  
+				<h1>sign up for <span>Disease Control</span> account</h1>
+				<h2> 
+					Read reviews, detailed descriptions, maps and quality photos. 
+				</h2>
+			
+				<span class="form_unit">
+					<input type="text" class="textbox_input" placeholder="username" value="">
+					<span class="textbox_explane">
+						<p class="tip">
+							Must contain at lease 6 character.
+						</p>
+					</span>
+				</span>
+				
+				<span class="form_unit">
+					<input type="text" class="textbox_input" placeholder="Email" value="">
+					<span class="textbox_explane">
+						<p class="tip error">
+							email ที่คุณจะใช้
+						</p>
+					</span>
+				</span>
+				
+				<span class="form_unit">
+					<input type="text" class="textbox_input" placeholder="Password" value="">
+					<span class="textbox_explane">
+						<p class="tip">
+							คุณต้องใส่อย่างน้อย 6ตัวอักษร
+						</p>
+					</span>
+				</span>
+				
+				<span class="form_unit">
+					<input type="text" class="textbox_input" placeholder="Password" value="">
+					<span class="textbox_explane">
+						<p class="tip error">
+							รหัสไม่ตรงกับข้างบน
+						</p>
+					</span>
+				</span>
+				
+				<span class="form_unit">
+					<input type="text" class="textbox_input" placeholder="position" value="">
+					<span class="textbox_explane">
+						<p class="tip">
+							Which organization you work?
+						</p>
+					</span>
+				</span>
+				
+				
+				<span class="button green"> register </span>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

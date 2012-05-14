@@ -1,0 +1,25 @@
+# encoding: utf-8
+require 'spec_helper'
+Dir[Rails.root.join("db/migrate/**/*.rb")].each {|f| require f}
+
+describe "ChangeMember" do
+  
+  before(:each) do
+    @member = Member.create(:facebook_id=>"1234",:name=>"TestMember")
+    commit_database
+  end
+  
+  it "convert to FacebookMember correctly" do
+            
+    ChangeMember.up
+    commit_database
+    
+    member_fb = Member.first(:conditions=>{:facebook_id=>@member.facebook_id})
+   
+    member_fb.should be_an_instance_of(FacebookMember)
+    member_fb.facebook_id.should == "1234"
+    member_fb.name.should == "TestMember"
+    member_fb._id.should_not be_nil
+  end
+  
+end

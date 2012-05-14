@@ -1,0 +1,23 @@
+development:
+    host: localhost
+    port: 27017
+    database: fbli
+    logger: true
+
+staging:
+    host: localhost
+    port: 27017
+    database: fbli_staging
+    logger: true
+
+test:
+    host: localhost
+    port: 27017
+    database: fbli_test
+    logger: true
+    
+production:
+    host: localhost
+    port: 27017
+    database: fbli
+    logger: false

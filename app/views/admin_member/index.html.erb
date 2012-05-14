@@ -1,0 +1,31 @@
+<span class="span-98 margin-top-2">
+    <span class="span-98 clearfix">
+		<span class="navigator clearfix">
+			<span class="float-left ">
+				<span class="float-left font12 bold_font medium_dark_gray line_height26px">
+					View Pending Member:
+				</span>
+				<br/>
+			</span>	
+		</span>
+		<br/>
+        <span class="span-68 search_result margin-top-1 clearfix">
+            <ul>
+                <%
+                    @pending_members.each do |member|
+                %>
+                    <%=render :partial=>"/admin_member/admin_member_approve_unit",:locals=>{:entity=>member}%>
+					<br/>
+                <%end%>
+            </ul>
+        </span>
+		<br/>
+		<span class="span-68">
+			<a class="gray_button_small margin-left-1 margin-top-1 font12 medium_dark_gray" href="#" onclick="admin_member_handler.approve(this);" id="admin_submit_button" >
+				<%= word_for :approve_member%>
+			</a>
+			
+       	</span>
+    </span>
+</span>
+<%=javascript_include_tag "/javascripts/admin_member/approve_member.js"%>

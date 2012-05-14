@@ -1,0 +1,34 @@
+<div id="form_container">  
+	<h1><%==word_for(:sign_up)%></h1>
+	<h2> 
+		<%==word_for(:sign_up_instruction)%>
+	</h2>
+	<span class="form_unit">
+		<input type="text" class="textbox_input" id="email_registration_email" placeholder="<%=word_for_attr :email%>" name="<%=Time.now.to_i%>">
+		<span class="textbox_explane" id="emailErrorPanel" >
+			<p class="tip">
+				<%=word_for(:email_instruction)%>
+			</p>
+		</span>
+	</span>
+	<span class="form_unit">
+		<span class="button green" onclick="email_registration_handler.submit(this);">
+			<%==word_for(:submit_register)%>
+		</span>
+		
+	</span>
+</div>
+
+<%=javascript_include_tag "/javascripts/email_registration/index.js"%>
+<script language="javascript">
+	var email_registration_validator = new validator("emailErrorPanel");
+	email_registration_validator.register_validation("email","email_registration_email","emailErrorPanel","",
+										[{
+											f: validator_helper.presence,
+											m: "<%=global_word_for('email_registration','email_presence')%>"
+										},null,
+										{
+											f:validator_helper.email,
+											m: "<%=global_word_for('email_registration','email_email')%>"
+										}]);
+</script>

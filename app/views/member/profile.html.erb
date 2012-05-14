@@ -1,0 +1,26 @@
+<div id="form_container">
+	<h1><%=word_for :profile%></h1>
+	<h2> 
+		<%=word_for :information%>
+	</h2>
+	<span class="form_unit">
+		<span class="label"><%=word_for(:email)%></span>
+		<span class="label"><%=@member.email%></span>
+	</span>
+	<span class="form_unit">
+		<span class="label"><%=word_for(:name)%></span>
+		<span class="label"><%=@member.name%></span>
+	</span>
+	<span class="form_unit">
+		<span class="label"><%=word_for(:work_place)%></span>
+		<span class="label"><%=@member.work_place%></span>
+	</span>
+	<span class="form_unit">
+		<span class="button green" onclick="location.href='/member/edit_form';">
+			<%==word_for(:edit_profile)%>
+		</span>
+		<span class="button green" onclick="location.href='/member/change_password_form';">
+			<%==word_for(:change_password)%>
+		</span>
+	</span>
+</div>

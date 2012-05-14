@@ -1,0 +1,124 @@
+<span class="example-bubble" style="width:auto;height:auto;">
+	<ul>
+		<li onclick="global_flood.toggle_view_all_filter();" >
+			<span id="filter_all_button" class="view-allPin" title="<%=word_for_attr :all_filter%>"></span><p><%=word_for :all_pin%></p>
+		</li>
+		<%
+			Post::DISEASE_FILTER.each do |disease_type|
+			type = disease_type.downcase
+			image_title = ""
+			image_word = ""
+			class_name = ""
+			if type == Post::DISEASE_CHIKUNGUNYA.downcase
+				image_title = word_for_attr :chikungunya_filter
+				image_word = word_for :chikungunya_pin
+				class_name = "view-chikun"
+			elsif type == Post::DISEASE_DENGUE_FEVER.downcase
+				image_title = word_for_attr :dengue_fever_filter
+				image_word = word_for :dengue_fever_pin
+				class_name = "view-dengue"
+			elsif type == Post::DISEASE_MALARIA.downcase
+				image_title = word_for_attr :malaria_filter
+				image_word = word_for :malaria_pin
+				class_name = "view-malaria"
+			elsif type == Post::DISEASE_LEPTO.downcase
+				image_title = word_for_attr :lepto_filter
+				image_word = word_for :lepto_pin
+				class_name = "view-lebto"
+			elsif type == Post::DISEASE_DENGUE_FEVER_1.downcase
+				image_title = word_for_attr :d1_filter
+				image_word = word_for :dengue_d1_pin
+				class_name = "view-d1"
+			elsif type == Post::DISEASE_DENGUE_FEVER_2.downcase
+				image_title = word_for_attr :d2_filter
+				image_word = word_for :dengue_d2_pin
+				class_name = "view-d2"
+			elsif type == Post::DISEASE_DENGUE_FEVER_3.downcase
+				image_title = word_for_attr :d3_filter
+				image_word = word_for :dengue_d3_pin
+				class_name = "view-d3"
+			elsif type == Post::DISEASE_DENGUE_FEVER_4.downcase
+				image_title = word_for_attr :d4_filter
+				image_word = word_for :dengue_d4_pin
+				class_name = "view-d4"
+			end
+		%>
+		  	<li onclick="global_flood.toggle_filter('<%=type%>');">
+		  		<span id="filter_<%=type%>_button" class="<%=class_name%>" title="<%=image_title%>"></span><p><%=image_word%></p>
+			</li>
+		<%end%>
+		<li>
+			<span id="filter_date" title="<%=word_for_attr :filter_date%>" >
+				<span style="float:left; width: 150px" >
+					<label><%=word_for :from%></label>
+					<input type="text" id="q_from" style="width: 90px;" value="" onchange="global_flood.query_from_date();">
+					
+					<label><%=word_for :to%></label>
+					<input type="text" id="q_to" style="width: 90px;" value="" onchange="global_flood.query_from_date();">
+				</span>
+			</span>
+			
+		</li>
+	</ul>
+</span>
+
+<script type="text/javascript">
+
+	global_flood.toggle_view_all_filter = function() {
+			global_flood.clear_button();
+			$("#filter_button").addClass('filter');
+			$("#filter_button_pop").addClass('filter');
+			global_flood.filter = "";
+			global_flood.query_location(true);
+	}
+	
+	global_flood.toggle_filter = function(filter_name) {
+			global_flood.clear_button();
+			$("#filter_button").addClass(filter_name);
+			$("#filter_button_pop").addClass(filter_name);
+			global_flood.filter = filter_name;
+			global_flood.query_location(true);
+	}
+	
+	global_flood.clear_button = function() {
+		$("#pop_panel_overlay").click();
+		
+		$("#filter_button").removeClass();
+		$("#filter_button").addClass('pop_panel_button');
+		
+		$("#filter_button_pop").removeClass();
+		$("#filter_button_pop").addClass('pop_panel_button');
+	}
+	
+	global_flood.query_from_date = function() {
+			global_flood.q_from = $('#q_from').val();
+			global_flood.q_to = $('#q_to').val();
+			global_flood.query_location(true);
+	}
+	
+	$(function() {
+			$("#q_from").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: 'dd M yy',
+				maxDate: 0,
+				yearRange: 'c-100:c'
+		});
+		
+		
+	});
+	
+	$(function() {
+			$("#q_to").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: 'dd M yy',
+				maxDate: 0,
+				yearRange: 'c-100:c'
+				
+				
+		});
+	});
+	
+	
+</script>

@@ -1,0 +1,286 @@
+<script type="text/javascript">
+	_gaq.push(['_trackPageview', '/post/edit_form']);
+	piwikTracker.setDocumentTitle("/post/edit_form");
+	piwikTracker.trackPageView();
+</script>
+
+<input type="hidden" id="lat" value="<%=params[:lat]%>" name="lat_<%=Time.now.to_i%>">
+<input type="hidden" id="lng" value="<%=params[:lng]%>" name="lng_<%=Time.now.to_i%>">
+<input type="hidden" id="disease_type" value="<%=@post.disease_type%>" name="disease_type_<%=Time.now.to_i%>">
+<span class="post-container">
+	<h4><%=word_for :edit_post%></h4>
+	<h2><%=@post.time.in_time_zone.strftime("%d %B %Y")%>, <em><%=@post.time.in_time_zone.strftime("%H:%M")%></em></h2>
+	
+	<span class="mapSnapshot">
+		<img src="http://maps.googleapis.com/maps/api/staticmap?markers=<%=@marker_pipe%>&zoom=15&sensor=false&size=290x200&language=<%=@locale%>">
+		<p>
+			<input type="text" id="place" value="<%=@post.place%>"><br/>
+			<em style="float:left;">(<%=@post.location[0]%>, <%=@post.location[1]%>)</em>
+		</p>
+		<span class="textbox_explane" id="error_panel_for_place"></span>
+	</span>
+	
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<textarea id="address" class="areatext_input" placeholder="<%=word_for_attr :address%>" rows="8" cols="40"><%=@post.address%></textarea>
+		<br/>
+	</span>
+	
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<span class="water_level-select" id="disease_type_panel">
+			<p><%=word_for :choose_disease_type%></br> <em><%=word_for :necessary%></em></p>
+			<ul>
+					<%
+						Post::DISEASE_TYPE.each do |level|
+							image_title = ""
+							if level == Post::DISEASE_CHIKUNGUNYA
+								image_title = word_for_attr(:disease_chikungunya) 
+							elsif level == Post::DISEASE_DENGUE_FEVER
+								image_title = word_for_attr(:disease_dengue_fever) 
+							elsif level == Post::DISEASE_MALARIA
+								image_title = word_for_attr(:disease_malaria)
+							elsif level == Post::DISEASE_LEPTO
+								image_title = word_for_attr(:disease_lepto)
+							end
+					%>
+						<li><span onclick="post_handler.select_disease('<%=level%>', this);" 
+									title="<%=image_title%>"
+									href="#" 
+									class="button gray diseaseType <%='disabled' if (level == @post.disease_type or (level == Post::DISEASE_DENGUE_FEVER and Post::DENGUE_TYPE.include?(@post.disease_type)))%>" 
+									style="padding:4px 4px 4px 4px; line-height: 0;"><img src="/images/button/<%=level.downcase%>.png"></span></li>
+					<%
+						end
+					%>
+				</ul>
+				<span class="textbox_explane" id="error_panel_for_disease_type"></span>
+		</span>
+	</span>
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<span class="water_level-select" id="dengue_type_panel" <%="style='display:none'" if !Post::DENGUE_TYPE.include?(@post.disease_type)%>>
+			<p><%=word_for :choose_dengue_type%></br> <em><%=word_for :necessary%></em></p>
+			<ul>
+					<%
+						Post::DENGUE_TYPE.each do |level|
+							image_title = ""
+							if level == Post::DISEASE_DENGUE_FEVER_1
+								image_title = word_for_attr(:disease_dengue_1) 
+							elsif level == Post::DISEASE_DENGUE_FEVER_2
+								image_title = word_for_attr(:disease_dengue_2) 
+							elsif level == Post::DISEASE_DENGUE_FEVER_3
+								image_title = word_for_attr(:disease_dengue_3)
+							elsif level == Post::DISEASE_DENGUE_FEVER_4
+								image_title = word_for_attr(:disease_dengue_4)
+							end
+					%>
+						<li><span onclick="post_handler.select_dengue('<%=level%>', this);" 
+									title="<%=image_title%>"
+									href="#" 
+									class="button gray diseaseType <%='disabled' if level == @post.disease_type%>" 
+									style="padding:4px 4px 4px 4px; line-height: 0;"><img src="/images/button/<%=level.downcase%>.png"></span></li>
+					<%
+						end
+					%>
+				</ul>
+				<span class="textbox_explane" id="error_panel_for_disease_type"></span>
+		</span>
+	</span>
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<span style="float:left; width: 150px">
+			<label><%=word_for :fill_patient_birthday%></label>
+			<input type="text" id="patient_birthday" style="width: 90px;" value="<%=@post.patient_birthday.strftime('%d %b %Y')%>">
+			<span class="textbox_explane" id="error_panel_for_patient_birthday"></span>
+		</span>
+		<span style="float:left; width: 150px">
+			<label><%=word_for :fill_gender%></label>
+			<select style="width: 100px;" id="gender">
+				<option value="<%=Post::GENDER_MALE%>" <%='selected' if @post.gender == Post::GENDER_MALE%>><%=Post::GENDER_MALE.downcase%></option>
+				<option value="<%=Post::GENDER_FEMALE%>" <%='selected' if @post.gender == Post::GENDER_FEMALE%>><%=Post::GENDER_FEMALE.downcase%></option>
+			</select>
+		</span>
+	</span>
+	
+	<span style="float:left; clear: both;">
+		<label><%=word_for :fill_occupation%></label>
+		<input id="occupation" type="text" placeholder="<%=word_for_attr :fill_occupation%>" style="width: 240px" value="<%=@post.occupation%>"/>
+		<span class="textbox_explane" id="error_panel_for_occupation"></span>
+    </span>
+	
+	<span style="float:left; clear: both;">
+		<label><%=word_for :fill_admit_date%></label>
+		<input type="text" id="admit_time" value="<%=@post.admit_time.strftime('%d %b %Y')%>" style="width: 240px">
+		<span class="textbox_explane" id="error_panel_for_admit_time"></span>
+	</span>
+	
+	<span style="float:left; clear: both;">
+		<textarea id="message" class="areatext_input" placeholder="<%=word_for_attr :fill_description%>" rows="8" cols="40"><%=@post.message%></textarea>
+		<span class="textbox_explane" id="error_panel_for_message"></span>
+	</span>
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<span class="textbox_explane" id="error_panel_for_post"></span>
+	</span>
+	<span style="float:left; clear: both; margin-bottom: 10px;">
+		<span class="button green xl" onclick="post_handler.submit(this);"><%=word_for :submit_button%>
+		</span>
+	</span>
+</span>
+
+<script type="text/javascript">
+	
+	$(function() {
+			$("#admit_time").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: 'dd M yy',
+				maxDate: 0
+		});
+	});
+	
+	$(function() {
+			$("#patient_birthday").datepicker({
+				changeMonth: true,
+				changeYear: true,
+				dateFormat: 'dd M yy',
+				maxDate: 0,
+				yearRange: 'c-100:c'
+		});
+	});
+	
+	var post_validator = new validator("error_panel_for_post");
+	post_validator.register_validation("message","message", "error_panel_for_message",
+									null,
+									[{
+										f: validator_helper.presence,
+										m: "<%=global_word_for(:post, :message_presence)%>"
+									}]);
+	
+	post_validator.register_validation("place","place",  "error_panel_for_place",
+									null,
+									[{
+										f: validator_helper.presence,
+										m: "<%=global_word_for(:post, :place_presence)%>"
+									}]);
+									
+	post_validator.register_validation("patient_birthday","patient_birthday", "error_panel_for_patient_birthday",
+									null,
+									[{
+										f: validator_helper.presence,
+										m: "<%=global_word_for(:post, :patient_birthday_presence)%>"
+									}]);
+	post_validator.register_validation("admit_time","admit_time", "error_panel_for_admit_time",
+									null,
+									[{
+										f: validator_helper.presence,
+										m: "<%=global_word_for(:post, :admit_time_presence)%>"
+									}]);
+									
+	post_validator.register_validation("disease_type","disease_type", "error_panel_for_disease_type",
+									null,
+									[{
+										f: validator_helper.presence,
+										m: "<%=global_word_for(:post, :disease_type_presence)%>"
+									}]);
+
+	var post_handler = {};
+	
+	post_handler.select_disease = function(level, sender) {
+		
+		if ($(sender).hasClass('disabled')) {
+			
+			$(sender).removeClass('disabled');
+			$('#disease_type').val("");
+			
+		} else {
+			
+			var all_buttons = $('.diseaseType');
+			
+			for (var i = 0; i < all_buttons.length; i++) 
+				$(all_buttons[i]).removeClass('disabled');
+			
+			$(sender).addClass('disabled');
+			
+			$('#disease_type').val(level);
+			
+		}
+		post_handler.show_dengue_panel(level, sender);
+	}
+	
+	post_handler.select_dengue = function(level, sender) {
+		
+		if ($(sender).hasClass('disabled')) {
+			
+			$(sender).removeClass('disabled');
+			$('#disease_type').val("");
+			
+		} else {
+			
+			var all_buttons = $('.dengueType');
+			
+			for (var i = 0; i < all_buttons.length; i++) 
+				$(all_buttons[i]).removeClass('disabled');
+			
+			$(sender).addClass('disabled');
+			
+			$('#disease_type').val(level);
+			
+		}
+	}
+	
+	post_handler.show_dengue_panel = function(level, sender) {
+		
+		if (level == "DENGUE") {
+			if ($(sender).hasClass('disabled')) {
+				$('#dengue_type_panel').show();
+				$('#disease_type').val("");
+			}else {
+				$('#disease_type').val("");
+				$('#dengue_type_panel').hide();
+			}
+		} else {
+			$('#dengue_type_panel').hide();
+			
+		}
+	}
+	
+	post_handler.submit = function(sender) {
+		
+		$(sender).loading_button(true);
+		
+		_gaq.push(['_trackEvent', 'Edit', 'Try', '']);
+		
+		$.ajax({
+			type: "POST",
+			url: '/post/edit',
+			cache: false,
+			data: {
+				id: "<%=@post.id%>",
+				place: $('#place').val(),
+				message: $('#message').val(),
+				disease_type: $('#disease_type').val(),
+				occupation: $('#occupation').val(),
+				gender: $('#gender').val(),
+				admit_time: $('#admit_time').val(),
+				patient_birthday: $('#patient_birthday').val(),
+				address: $('#address').val()
+			},
+			success: function(data){
+				_gaq.push(['_trackEvent', 'Edit', 'Succeeded', '']);
+				
+				if(data.ok == false) {
+					$(sender).loading_button(false);
+					post_validator.show_error(data.error_messages);
+					return;
+				}
+				
+				
+				$('#dialog').dialog('close');
+			},
+			error: function(req, status, e){
+				$(sender).loading_button(false);
+				if (req.status == 0) return;
+				
+				main_library.log_failed_ajax('/post/edit', req, status, e);
+				alert('ไม่สามารถติดต่อกับระบบได้ กรุณาลองอีกครั้งในอีก 10 วินาที');
+			}
+		});
+	};
+
+</script>

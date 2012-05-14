@@ -1,0 +1,15 @@
+Time.now: <%=Time.now%><br/>
+Time.now.utc: <%=Time.now.utc%><br/>
+Time.now.in_time_zone: <%=Time.now.in_time_zone%><br/>
+
+<%
+	post = Post.desc(:time).first
+
+	if post != nil
+%>
+	post.time: <%=post.time%><br/>
+	post.time.utc: <%=post.time.utc%><br/>
+	post.time.in_time_zone: <%=post.time.in_time_zone%><br/>
+<%
+	end
+%>

@@ -1,0 +1,60 @@
+<script type="text/javascript">
+	_gaq.push(['_trackPageview', '/home/guest']);
+	piwikTracker.setDocumentTitle("/home/guest");
+	piwikTracker.trackPageView();
+</script>
+<%
+	content_for(:header) do
+%>
+	<%=render :partial=>"home/guest_header"%>
+<%
+	end
+%>
+<input type="hidden" id="login_form_redirect_url" value="<%=params[:redirect_url]%>">
+<div class="login">
+	<span class="login-container clearfix">
+		<h4>
+			<%=word_for(:please_login)%>
+		</h4>
+		<span class="form_unit">
+			<input type="text" class="textbox_input" placeholder="<%=word_for_attr :email%>" id="login_form_email">
+		</span>
+		<span class="form_unit">
+			<input type="password" class="textbox_input" placeholder="<%=word_for_attr :password%>" id="login_form_password">
+		</span>
+		<span class="form_unit" style="padding-bottom: 10px;">
+			<input type="checkbox" id="login_remember_me" value="yes"><%=word_for(:remember_me)%><br>
+		</span>
+		<span class="button-01 blue" id="login_form_submit_button" onclick="login_form_handler.submit(this);"> 
+			<%=word_for(:login)%>
+		</span>
+		<span class="form_unit">
+			<span class="textbox_explane" id="login_form_error_panel">
+			</span>
+		</span>
+		<a href="/member/forget_password_form">
+			<%=word_for(:forget_password)%>
+		</a>
+	</span>
+</div>
+<%= javascript_include_tag "/javascripts/featured_member/login_form.js"%>
+<script language="javascript">
+	var login_form_validator = new validator("login_form_error_panel");
+	login_form_validator.register_validation("email","login_form_email",null,
+										null,
+										[{
+											f: validator_helper.presence,
+											m: "<%=global_word_for('login','email_presence')%>"
+										},null,
+										{
+											f:validator_helper.email,
+											m: "<%=global_word_for('login','email_email')%>"
+										}]);
+										
+	login_form_validator.register_validation("password","login_form_password",null,
+										null,
+										[{
+											f: validator_helper.presence,
+											m: "<%=global_word_for('login','password_presence')%>"
+										}]);
+</script>	

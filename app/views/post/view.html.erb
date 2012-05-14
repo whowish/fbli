@@ -1,0 +1,130 @@
+<%
+	content_for(:meta_tag) do
+
+		if @posts[0]
+%>
+			<meta property="og:title" content="<%=@posts[0].place%>" />
+			<meta property="og:description" content="<%=t :description %>" />
+			<meta property="og:image" content="<%=@image_url%>" />
+<%
+		end
+	end
+%>
+<%
+	content_for(:javascript_files) do
+%>
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&language=<%=@locale%>&region=TH" type="text/javascript"></script>
+	<%= javascript_include_tag "application.js" %>
+	<%= javascript_include_tag "view.js" %>
+<%
+	end
+%>
+<script type="text/javascript">
+	_gaq.push(['_trackPageview', '/post/view']);
+	piwikTracker.setDocumentTitle("/post/view");
+	piwikTracker.trackPageView();
+</script>
+<span class="dialogContent viewPage">
+	<span class="viewHeader">
+		<span id="place"></span>
+		<%
+			if @posts[0]
+		%>
+			<%
+				if request.xhr?
+			%>
+				<span class="addIcon" title="Add new post here." onclick="global_flood.to_add_page('<%=@center[0]%>','<%=@center[1]%>');"></span>
+			<%
+				end
+			%>
+		<%
+			end
+		%>
+	</span>
+	<span class="mapSnapshot">
+		<img src="<%=@google_map_image_url%>">
+	</span>
+	<%
+		@posts.each_with_index do |post,index|
+			vote_type = ((@member.is_guest)? "" : post.is_vote_up_or_down(@member.id))
+	%>
+		<span class="viewer-unit clearfix">
+			<span>
+				<span class="disease">
+					<%
+						if post.disease_type and post.disease_type != ""
+							image_title = ""
+							if post.disease_type == Post::DISEASE_CHIKUNGUNYA
+								image_title = word_for_attr(:disease_chikungunya) 
+							elsif post.disease_type == Post::DISEASE_DENGUE_FEVER
+								image_title = word_for_attr(:disease_dengue_fever) 
+							elsif post.disease_type == Post::DISEASE_MALARIA
+								image_title = word_for_attr(:disease_malaria)
+							elsif post.disease_type == Post::DISEASE_LEPTO
+								image_title = word_for_attr(:disease_lepto)
+							end
+							
+					%>
+						<img src="/images/button/<%=post.disease_type.downcase%>.png" title="<%=image_title%>">
+					<%end%>
+					
+					<%
+						if post.gender and post.gender != ""
+							image_title = ""
+							if post.gender == Post::GENDER_MALE
+								image_title = word_for_attr(:gender_male) 
+							else
+								image_title = word_for_attr(:gender_female) 
+							end
+					%>
+					<img src="../images/button/<%=post.gender.downcase%>.png" title="<%=image_title%>">
+					<%end%>	
+				</span>
+				<span class="share">
+					<span class="edit" title="<%=word_for_attr :edit%>" id="edit_button_<%=post.id%>" onclick="global_flood.to_edit_page('<%=post.id%>');"></span>
+					<span class="delete" title="<%=word_for_attr :delete%>" id="delete_button_<%=post.id%>" onclick="view_handler.remove(this, '<%=post.id%>');"></span>
+				</span>
+				<h1> <%=post.occupation%> | <%=post.get_patient_age%> <%=word_for :years_old%></h1>
+				<h2><%=word_for :admit_date%> <%=post.admit_time.strftime("%d %B %Y")%></h2>
+				<%
+					if post.address and post.address != ""
+				%>
+						<h3><%=post.address%></h3>
+				<%
+					end
+				%>
+				<%
+					if post.has_image?
+				%>
+						<img src="<%=post.get_image%>">
+				<%
+					end
+				%>
+				<p style="float:left;">
+					<%=post.message%>
+				</p>
+			</span>
+		</span>
+		
+	<%
+		end
+	%>
+</span>
+<script type="text/javascript">
+	$(function() {
+		$('#place').addClass('searching');
+		
+		setTimeout( function() {
+			
+			main_library.get_address('<%=@center[0]%>','<%=@center[1]%>',
+									function(address) {
+										$('#place').html(address);
+										$('#place').removeClass('searching');
+									},
+									function() {
+										$('#place').removeClass('searching');
+									});
+								
+		});
+	});
+</script>

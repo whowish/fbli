@@ -1,0 +1,39 @@
+<div id="form_container">
+	<h1><%=word_for :edit_profile%></h1>
+	<h2> 
+		<%=word_for :edit_profile_tip%>
+	</h2>
+	<span class="form_unit">
+		<span class="label"><%=word_for(:name)%></span>
+		<input type="text" id="name" placeholder="<%=word_for_attr :name%>" value="<%=@member.name%>">
+	</span>
+	<span class="form_unit">
+		<span class="label"><%=word_for(:work_place)%></span>
+		<input type="text" id="work_place" placeholder="<%=word_for_attr :work_place%>" value="<%=@member.work_place%>">
+	</span>
+	<span class="form_unit">
+		<span class="button green" style="float:left;" onclick="edit_form_handler.submit(this);">
+			<%==word_for(:submit_edit)%>
+		</span>
+		<span id="errorPanel" class="textbox_explane">
+
+		</span>
+	</span>
+</div>
+<%=javascript_include_tag "/javascripts/featured_member/edit_form.js"%>
+
+<script language="javascript">
+
+	var edit_form_validator = new validator("errorPanel");
+	edit_form_validator.register_validation("name","name",null,"",
+										[{
+											f: validator_helper.presence,
+											m: "<%=global_word_for('name','name_presence')%>"
+										}]);
+	edit_form_validator.register_validation("work_place","work_place",null,"",
+										[{
+											f: validator_helper.presence,
+											m: "<%=global_word_for('work_place','work_place_presence')%>"
+										}]);
+
+</script>	

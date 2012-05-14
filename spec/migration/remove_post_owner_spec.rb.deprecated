@@ -1,0 +1,235 @@
+# encoding: utf-8
+require 'spec_helper'
+Dir[Rails.root.join("db/migrate/**/*.rb")].each {|f| require f}
+
+describe "RemovePostOwner" do
+  
+  it "remove post owner and link facebook member correctly" do
+    
+      facebook = FacebookMember.create(:facebook_id=>"100000336011216",
+                                    :name=>"Test"
+                                    )
+    
+      post = Post.create("facebook_id" => facebook.facebook_id, 
+                          "image"=>"" , 
+                          "location" => [ 13.6708 , 100.2787],
+                          "message" => "มีฝนตก-ฟ้าร้อง",
+                          "owner" => { 
+                                      "facebook_id" => facebook.facebook_id, 
+                                      "name" => facebook.name, 
+                                      "_id" => "4eaadbba72a35214f0000014", 
+                                      "_type" => "FacebookOwner"
+                                      },
+                          "place" => "3091", 
+                          "time" => Time.now.utc,
+                          "voted_down" => 0, 
+                          "voted_up" => 0,
+                          "water_height" => 0
+                        ) 
+    commit_database
+            
+    RemovePostOwner.up
+    commit_database
+    
+    post = Post.find(post.id)
+    post.member_id.should == facebook.id
+    post.name.should == facebook.name
+    
+    post[:owner].should be_nil
+
+  end
+
+
+  it "remove post owner and create new facebook member" do
+    
+      post = Post.create("facebook_id" => "1111", 
+                      "image"=>"" , 
+                      "location" => [ 13.6708 , 100.2787],
+                      "message" => "มีฝนตก-ฟ้าร้อง",
+                      "owner" => { 
+                                  "facebook_id" => "1111", 
+                                  "name" => "Test", 
+                                  "_id" => "4eaadbba72a35214f0000014", 
+                                  "_type" => "FacebookOwner"
+                                  },
+                      "place" => "3091", 
+                      "time" => Time.now.utc,
+                      "voted_down" => 0, 
+                      "voted_up" => 0,
+                      "water_height" => 0
+                      ) 
+                      
+    commit_database        
+    RemovePostOwner.up
+    commit_database
+    
+    facebook = FacebookMember.first(:conditions=>{:facebook_id=>"1111"})
+    facebook.should_not be_nil
+    facebook.name.should == "Test"
+    facebook.facebook_id.should == "1111"
+    
+    post = Post.find(post.id)
+    post.member_id.should == facebook.id
+    post.name.should == facebook.name
+
+    post[:owner].should be_nil
+
+  end
+
+
+  it "remove post owner and links twitter member" do
+    
+      twitter = TwitterMember.create(:twitter_id=>"test",
+                                      :name=>"@test")
+    
+      post = Post.create("image" => "",
+                          "location" => [ 13.617924 , 100.717748],
+                          "message" => "สถานการณ์ปกติ",
+                          "owner" => { 
+                                      "twitter_id" => twitter.twitter_id, 
+                                      "tweet_id" => "129351912893054978", 
+                                      "name" => twitter.name, 
+                                      "_id" => "4eaadbbc72a35214f00004ec", 
+                                      "_type" => "TwitterOwner"
+                                      }, 
+                          "place" => "สุขาภิบาล 6", 
+                          "time" => Time.now.utc, 
+                          "voted_down" => 0, 
+                          "voted_up" => 0, 
+                          "water_height" => 0
+                        ) 
+    commit_database
+            
+    RemovePostOwner.up
+    commit_database
+    
+    post = Post.find(post.id)
+    post.member_id.should == twitter.id
+    post.name.should == twitter.name
+    
+    post.tweet_id.should == "129351912893054978"
+
+    post[:owner].should be_nil
+
+  end
+
+
+  it "remove post owner and create new twitter member" do
+    
+      post = Post.create("image" => "",
+                          "location" => [ 13.617924 , 100.717748],
+                          "message" => "สถานการณ์ปกติ",
+                          "owner" => { 
+                                      "twitter_id" => "huangzaa", 
+                                      "tweet_id" => "129351912893054978", 
+                                      "name" => "@huangzaa", 
+                                      "_id" => "4eaadbbc72a35214f00004ec", 
+                                      "_type" => "TwitterOwner"
+                                      }, 
+                          "place" => "สุขาภิบาล 6", 
+                          "time" => Time.now.utc,
+                          "voted_down" => 0, 
+                          "voted_up" => 0, 
+                          "water_height" => 0
+                        ) 
+    commit_database
+            
+    RemovePostOwner.up
+    commit_database
+    
+    twitter = TwitterMember.first(:conditions=>{:twitter_id=>"huangzaa"})
+    twitter.should_not be_nil
+    twitter.name.should == "@huangzaa"
+    twitter.twitter_id.should == "huangzaa"
+    
+    post = Post.find(post.id)
+    post.member_id.should == twitter.id
+    post.name.should == twitter.name
+    
+    post.tweet_id.should == "129351912893054978"
+
+    post[:owner].should be_nil
+
+  end
+  
+  
+  it "remove post owner and links instagram member" do
+    
+      instagram = InstagramMember.create(:instagram_user_id=>"1234",
+                                      :name=>"test")
+    
+      post = Post.create("image" => "",
+                          "location" => [ 13.617924 , 100.717748],
+                          "message" => "สถานการณ์ปกติ",
+                          "owner" => { 
+                                      "instagram_user_id" => instagram.instagram_user_id, 
+                                      "instagram_media_id" => "1111",
+                                      "instagram_image_url" => "hello", 
+                                      "name" => instagram.name, 
+                                      "_id" => "4eaadbbc72a35214f00004ec", 
+                                      "_type" => "InstagramOwner"
+                                      }, 
+                          "place" => "สุขาภิบาล 6", 
+                          "time" => Time.now.utc, 
+                          "voted_down" => 0, 
+                          "voted_up" => 0, 
+                          "water_height" => 0
+                        ) 
+    commit_database
+            
+    RemovePostOwner.up
+    commit_database
+    
+    post = Post.find(post.id)
+    post.member_id.should == instagram.id
+    post.name.should == instagram.name
+    
+    post.instagram_media_id.should == "1111"
+    post.instagram_image_url.should == "hello"
+
+    post[:owner].should be_nil
+    post[:twitter_id].should be_nil
+
+  end
+
+
+  it "remove post owner and create new instagram member" do
+    
+      post = Post.create("image" => "",
+                          "location" => [ 13.617924 , 100.717748],
+                          "message" => "สถานการณ์ปกติ",
+                          "owner" => { 
+                                      "instagram_user_id" => "1234", 
+                                      "instagram_media_id" => "1111", 
+                                      "instagram_image_url" => "hello", 
+                                      "name" => "test", 
+                                      "_id" => "4eaadbbc72a35214f00004ec", 
+                                      "_type" => "InstagramOwner"
+                                      }, 
+                          "place" => "สุขาภิบาล 6", 
+                          "time" => Time.now.utc,
+                          "voted_down" => 0, 
+                          "voted_up" => 0, 
+                          "water_height" => 0
+                        ) 
+    commit_database
+            
+    RemovePostOwner.up
+    commit_database
+    
+    instagram = InstagramMember.first(:conditions=>{:instagram_user_id=>"1234"})
+    instagram.should_not be_nil
+    instagram.name.should == "test"
+    instagram.instagram_user_id.should == "1234"
+    
+    post = Post.find(post.id)
+    post.member_id.should == instagram.id
+    post.name.should == instagram.name
+    
+    post.instagram_media_id.should == "1111"
+    post.instagram_image_url.should == "hello"
+
+    post[:owner].should be_nil
+
+  end
+end

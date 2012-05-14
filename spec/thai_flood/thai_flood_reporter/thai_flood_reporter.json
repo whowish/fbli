@@ -1,0 +1,214 @@
+{
+  "completed_in": 0.175,
+  "max_id": 132360883014877184,
+  "max_id_str": "132360883014877184",
+  "next_page": "?page=2&max_id=132360883014877184&q=%23thaiflood%20maps.google&rpp=5&include_entities=1&with_twitter_user_id=1",
+  "page": 1,
+  "query": "%23thaiflood+maps.google",
+  "refresh_url": "?since_id=132360883014877184&q=%23thaiflood%20maps.google&include_entities=1&with_twitter_user_id=1",
+  "results": [
+    {
+      "created_at": "Fri, 04 Nov 2011 07:37:48 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              77,
+              87
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/2hewMNvr",
+            "expanded_url": "http://bit.ly/rtea6G",
+            "display_url": "bit.ly/rtea6G",
+            "indices": [
+              88,
+              108
+            ]
+          }
+        ]
+      },
+      "from_user": "ployzaa202",
+      "from_user_id": 223373468,
+      "from_user_id_str": "223373468",
+      "geo": null,
+      "id": 132360883014877184,
+      "id_str": "132360883014877184",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a1.twimg.com/profile_images/1601037919/299049_266402913390686_100000629379558_871503_870965108_n_normal.jpg",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:37น.] ถนนวัชรพล ท่าแร้ง บางเขน กรุงเทพมหานคร \"น้ำท่วม-ห้ามรถเล็ก\" #ThaiFlood http://t.co/2hewMNvr",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:35:51 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              92,
+              102
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/Bpf8ny5w",
+            "expanded_url": "http://bit.ly/sqzHod",
+            "display_url": "bit.ly/sqzHod",
+            "indices": [
+              103,
+              123
+            ]
+          }
+        ]
+      },
+      "from_user": "beery_beery",
+      "from_user_id": 376124992,
+      "from_user_id_str": "376124992",
+      "geo": null,
+      "id": 132360392084176896,
+      "id_str": "132360392084176896",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1560887703/image_normal.jpg",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:35น.] ซอยเพชรเกษม 15 แยก 1 วัดท่าพระ บางกอกใหญ่ กรุงเทพมหานคร \"ขณะนี้น้ำไม่ท่วม\" #ThaiFlood http://t.co/Bpf8ny5w",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:34:18 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              94,
+              104
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/F2D0M4c5",
+            "expanded_url": "http://bit.ly/t8kauv",
+            "display_url": "bit.ly/t8kauv",
+            "indices": [
+              105,
+              125
+            ]
+          }
+        ]
+      },
+      "from_user": "nutapol_lhotmai",
+      "from_user_id": 35705570,
+      "from_user_id_str": "35705570",
+      "geo": null,
+      "id": 132360004731801600,
+      "id_str": "132360004731801600",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1553128621/image_normal.jpg",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:34น.] ถนนเฉลิมเขต 4 วัดเทพศิรินทร์ ป้อมปราบศัตรูพ่าย กรุงเทพมหานคร \"สถานการณ์ปกติ\" #ThaiFlood http://t.co/F2D0M4c5",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:30:01 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              69,
+              79
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/7guVdY3e",
+            "expanded_url": "http://bit.ly/uxTUIe",
+            "display_url": "bit.ly/uxTUIe",
+            "indices": [
+              80,
+              100
+            ]
+          }
+        ]
+      },
+      "from_user": "cacharinS",
+      "from_user_id": 244752720,
+      "from_user_id_str": "244752720",
+      "geo": null,
+      "id": 132358925340262400,
+      "id_str": "132358925340262400",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a1.twimg.com/sticky/default_profile_images/default_profile_2_normal.png",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:29น.] อินทามระ 55 ดินแดง กรุงเทพมหานคร \"ขณะนี้น้ำไม่ท่วม\" #ThaiFlood http://t.co/7guVdY3e",
+      "to_user_id": null,
+      "to_user_id_str": null
+    },
+    {
+      "created_at": "Fri, 04 Nov 2011 07:26:20 +0000",
+      "entities": {
+        "hashtags": [
+          {
+            "text": "ThaiFlood",
+            "indices": [
+              79,
+              89
+            ]
+          }
+        ],
+        "urls": [
+          {
+            "url": "http://t.co/D4Xb07hJ",
+            "expanded_url": "http://bit.ly/voNrs6",
+            "display_url": "bit.ly/voNrs6",
+            "indices": [
+              90,
+              110
+            ]
+          }
+        ]
+      },
+      "from_user": "ubbibb",
+      "from_user_id": 60070311,
+      "from_user_id_str": "60070311",
+      "geo": null,
+      "id": 132357996532604928,
+      "id_str": "132357996532604928",
+      "iso_language_code": "th",
+      "metadata": {
+        "result_type": "recent"
+      },
+      "profile_image_url": "http://a2.twimg.com/profile_images/1032196748/AEB958F3_normal.jpg",
+      "source": "&lt;a href=&quot;http://itunes.apple.com/app/thai-flood-tweet-reporter/id471611074&quot; rel=&quot;nofollow&quot;&gt;ThaiFlood Reporter&lt;/a&gt;",
+      "text": "[4 พ.ย. 14:26น.] ถนนแจ้งวัฒนะ ปากเกร็ด อ.ปากเกร็ด จ.นนทบุรี \"ขณะนี้น้ำไม่ท่วม\" #ThaiFlood http://t.co/D4Xb07hJ",
+      "to_user_id": null,
+      "to_user_id_str": null
+    }
+  ],
+  "results_per_page": 5,
+  "since_id": 0,
+  "since_id_str": "0"
+}

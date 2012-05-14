@@ -1,0 +1,169 @@
+# encoding: utf-8
+require 'spec_helper'
+
+describe "GamlingTwitter" do
+  
+  
+  it "adds a record correctly" do
+    
+    ThaiFlood.stub(:get_json).and_return(ActiveSupport::JSON.decode(IO.read(File.join(Rails.root,"spec/thai_flood/gamling_twitter/twitter_single_record.json"))))
+
+    ThaiFlood::GamlingTwitter.initialize_resource
+
+    data = ThaiFlood::GamlingTwitter.query
+    
+    data.each { |row|
+      ThaiFlood::GamlingTwitter.process(row)
+    }
+    
+    commit_database
+    members = Member.all
+    members.length.should == 1
+    
+    members[0].twitter_id.should == "tanin47"
+    members[0].name.should == "@tanin47"
+    
+    posts = Post.all
+    posts.length.should == 1
+    
+    posts[0].location[0].should == 13.737
+    posts[0].location[1].should == 100.5847
+    
+    posts[0].message.should == "#gamlingorg ไม่ท่วม "
+    posts[0].water_height.should == Post::WATER_LEVELS[0]
+    
+    posts[0].tweet_image_url.should == "http://twitgoo.com/4tjybp/img"
+    posts[0].tweet_id.should == "132365007949271041"
+    
+    posts[0].member_id == members[0].id
+    
+    checkeds = CheckedTwitter.all
+    checkeds.length.should == 1
+    checkeds[0].tweet_id == "132365007949271041"
+    
+  end
+  
+  
+  it 'adds record that has no image' do
+    ThaiFlood.stub(:get_json).and_return(ActiveSupport::JSON.decode(IO.read(File.join(Rails.root,"spec/thai_flood/gamling_twitter/twitter_single_record_no_image.json"))))
+
+    ThaiFlood::GamlingTwitter.initialize_resource
+
+    data = ThaiFlood::GamlingTwitter.query
+    
+    data.each { |row|
+      ThaiFlood::GamlingTwitter.process(row)
+    }
+    
+    commit_database
+    members = Member.all
+    members.length.should == 1
+    
+    members[0].twitter_id.should == "tanin47"
+    members[0].name.should == "@tanin47"
+    
+    posts = Post.all
+    posts.length.should == 1
+    
+    posts[0].location[0].should == 13.737
+    posts[0].location[1].should == 100.5847
+    
+    posts[0].message.should == "#gamlingorg ไม่ท่วม http://t.co/JkmliJ52"
+    posts[0].water_height.should == Post::WATER_LEVELS[0]
+    
+    posts[0].tweet_image_url.should be_nil
+    posts[0].tweet_id.should == "132365007949271041"
+    
+    posts[0].member_id == members[0].id
+    
+    checkeds = CheckedTwitter.all
+    checkeds.length.should == 1
+    checkeds[0].tweet_id == "132365007949271041"
+    
+  end
+
+
+  it "adds two records with the same member" do
+
+    ThaiFlood.stub(:get_json).and_return(ActiveSupport::JSON.decode(IO.read(File.join(Rails.root,"spec/thai_flood/gamling_twitter/twitter_two_records_with_same_member.json"))))
+
+    ThaiFlood::GamlingTwitter.initialize_resource
+
+    data = ThaiFlood::GamlingTwitter.query
+    
+    data.each { |row|
+      ThaiFlood::GamlingTwitter.process(row)
+    }
+    
+    commit_database
+    members = Member.all
+    members.length.should == 1
+    
+    members[0].twitter_id.should == "tanin47"
+    members[0].name.should == "@tanin47"
+    
+    posts = Post.all
+    posts.length.should == 2
+    
+    posts[0].member_id == members[0].id
+    posts[1].member_id == members[0].id
+    
+    checkeds = CheckedTwitter.all
+    checkeds.length.should == 2
+    checkeds[0].tweet_id == "132365007949271041"
+    checkeds[1].tweet_id == "132365007949271042"
+
+  end
+
+  
+  it "does not add redundant record" do
+
+    ThaiFlood.stub(:get_json).and_return(ActiveSupport::JSON.decode(IO.read(File.join(Rails.root,"spec/thai_flood/gamling_twitter/twitter.json"))))
+
+    ThaiFlood::GamlingTwitter.initialize_resource
+
+    2.times {
+      data = ThaiFlood::GamlingTwitter.query
+      
+      data.each { |row|
+        ThaiFlood::GamlingTwitter.process(row)
+      }
+      
+      commit_database
+      members = Member.all
+      members.length.should == 1
+      
+      posts = Post.all
+      posts.length.should == 3
+      
+      CheckedTwitter.all.length == 3
+    }
+
+  end
+  
+  
+  it "does not add record with no location" do
+    
+    ThaiFlood.stub(:get_json).and_return(ActiveSupport::JSON.decode(IO.read(File.join(Rails.root,"spec/thai_flood/gamling_twitter/twitter_without_location.json"))))
+
+    ThaiFlood::GamlingTwitter.initialize_resource
+
+    data = ThaiFlood::GamlingTwitter.query
+    
+    data.each { |row|
+      ThaiFlood::GamlingTwitter.process(row)
+    }
+    
+    commit_database
+    members = Member.all
+    members.length.should == 0
+    
+    posts = Post.all
+    posts.length.should == 0
+    
+    CheckedTwitter.all.length == 0
+    
+  end
+  
+end
+  

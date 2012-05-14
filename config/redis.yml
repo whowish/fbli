@@ -1,0 +1,16 @@
+development:
+    host: localhost
+    port: 6377
+    
+staging:
+    host: localhost
+    port: 63771
+
+test:
+    host: localhost
+    port: 9736
+    
+production:
+    host: localhost
+    port: 6380
+

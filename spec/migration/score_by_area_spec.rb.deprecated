@@ -1,0 +1,245 @@
+# encoding: utf-8
+require 'spec_helper'
+Dir[Rails.root.join("db/migrate/**/*.rb")].each {|f| require f}
+
+describe "ScoreByAreaMigration" do
+  before(:each) do
+    
+    FileUtils.mkdir_p File.join(Rails.root, "public/uploads/temp")
+    FileUtils.mkdir_p File.join(Rails.root, "public/uploads/images")
+    
+    Dir[File.join(Rails.root, "public/uploads/temp/*")].each { |f| 
+      FileUtils.remove(f, :force=>true)
+    }
+    
+    Dir[File.join(Rails.root, "public/uploads/images/*")].each { |f| 
+      FileUtils.remove(f, :force=>true)
+    }
+    
+  end
+  
+  it "add location group correctly no pic" do
+    
+      member = FacebookMember.create(:facebook_id=>"100000336011216",
+                                    :name=>"Test"
+                                    )
+    
+      post = Post.create("member_id" => member.id, 
+                          "name" => member.name,
+                          "image"=>"" , 
+                          "location" => [ 13.6708 , 100.2117],
+                          "message" => "มีฝนตก-ฟ้าร้อง",
+                          "place" => "3091", 
+                          "time" => Time.now.utc,
+                          "voted_down" => 0, 
+                          "voted_up" => 0,
+                          "water_height" => 0
+                        ) 
+
+    commit_database
+            
+    ScoreByArea.up
+    commit_database
+
+    scores = ScorePerDay.all
+    scores.length.should == 1
+    
+    scores[0].location_group[0].should == 13.66
+    scores[0].location_group[1].should == 100.20
+    scores[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    scores[0].score.should == 1
+    scores[0].member_id.should == member.id
+    
+    maxes = MaxScorePerDayPerArea.all
+    maxes.length.should == 1
+    
+    maxes[0].location_group[0].should == 13.66
+    maxes[0].location_group[1].should == 100.20
+    maxes[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    maxes[0].score.should == 1
+    maxes[0].member_id.should == member.id
+    
+    member = Member.find(member.id)
+    member.all_score.should == 1
+
+  end
+
+  it "add location group correctly with pic" do
+    
+      member = FacebookMember.create(:facebook_id=>"100000336011216",
+                                    :name=>"Test"
+                                    )
+      FileUtils.copy(File.expand_path("../../assets/taylor_swift.jpg",__FILE__), 
+                  File.join(Rails.root, "public/uploads/temp/taylor_swift.jpg"))
+                  
+      post = Post.create("member_id" => member.id, 
+                          "name" => member.name,
+                          "image"=> "/uploads/temp/taylor_swift.jpg" , 
+                          "location" => [ 13.6708 , 100.2787],
+                          "message" => "มีฝนตก-ฟ้าร้อง",
+                          "place" => "3091", 
+                          "time" => Time.now.utc,
+                          "voted_down" => 0, 
+                          "voted_up" => 0,
+                          "water_height" => 0
+                        ) 
+
+    commit_database
+            
+    ScoreByArea.up
+    commit_database
+    
+    scores = ScorePerDay.all
+    scores.length.should == 1
+    
+    scores[0].location_group[0].should == 13.66
+    scores[0].location_group[1].should == 100.28
+    scores[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    scores[0].score.should == 10
+    scores[0].member_id.should == member.id
+    
+    maxes = MaxScorePerDayPerArea.all
+    maxes.length.should == 1
+    
+    maxes[0].location_group[0].should == 13.66
+    maxes[0].location_group[1].should == 100.28
+    maxes[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    maxes[0].score.should == 10
+    maxes[0].member_id.should == member.id
+    
+    member = Member.find(member.id)
+    member.all_score.should == 10
+
+  end
+
+
+  it "tops the previous max" do
+    
+    member0 = FacebookMember.create(:facebook_id=>"100000336011216",
+                                  :name=>"Test"
+                                  )
+                                  
+    member1 = FacebookMember.create(:facebook_id=>"100000336011217",
+                                  :name=>"Test"
+                                  )
+                                  
+    post = Post.create("member_id" => member0.id, 
+                  "name" => member0.name,
+                  "image"=>"" , 
+                  "location" => [ 13.6708 , 100.2787],
+                  "message" => "มีฝนตก-ฟ้าร้อง",
+                  "place" => "3091", 
+                  "time" => Time.now.utc,
+                  "voted_down" => 0, 
+                  "voted_up" => 0,
+                  "water_height" => 0
+                ) 
+    sleep(1)
+
+
+    FileUtils.copy(File.expand_path("../../assets/taylor_swift.jpg",__FILE__), 
+                File.join(Rails.root, "public/uploads/temp/taylor_swift.jpg"))
+                
+    post = Post.create("member_id" => member1.id, 
+                        "name" => member1.name,
+                        "image"=> "/uploads/temp/taylor_swift.jpg" , 
+                        "location" => [ 13.6708 , 100.2787],
+                        "message" => "มีฝนตก-ฟ้าร้อง",
+                        "place" => "3091", 
+                        "time" => Time.now.utc,
+                        "voted_down" => 0, 
+                        "voted_up" => 0,
+                        "water_height" => 0
+                      ) 
+
+    commit_database
+            
+    ScoreByArea.up
+    commit_database
+    
+    scores = ScorePerDay.all
+    scores.length.should == 2
+    
+    maxes = MaxScorePerDayPerArea.all
+    maxes.length.should == 1
+    
+    maxes[0].location_group[0].should == 13.66
+    maxes[0].location_group[1].should == 100.28
+    maxes[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    maxes[0].score.should == 10
+    maxes[0].member_id.should == member1.id
+    
+    member0 = Member.find(member0.id)
+    member0.all_score.should == 1
+
+    member1 = Member.find(member1.id)
+    member1.all_score.should == 10
+
+  end
+
+  it "does not top the previous max" do
+    
+    member0 = FacebookMember.create(:facebook_id=>"100000336011216",
+                                  :name=>"Test"
+                                  )
+                                  
+    member1 = FacebookMember.create(:facebook_id=>"100000336011217",
+                                  :name=>"Test"
+                                  )
+                                  
+    FileUtils.copy(File.expand_path("../../assets/taylor_swift.jpg",__FILE__), 
+                File.join(Rails.root, "public/uploads/temp/taylor_swift.jpg"))
+                
+    post = Post.create("member_id" => member1.id, 
+                        "name" => member1.name,
+                        "image"=> "/uploads/temp/taylor_swift.jpg" , 
+                        "location" => [ 13.6708 , 100.2787],
+                        "message" => "มีฝนตก-ฟ้าร้อง",
+                        "place" => "3091", 
+                        "time" => Time.now.utc,
+                        "voted_down" => 0, 
+                        "voted_up" => 0,
+                        "water_height" => 0
+                      ) 
+    sleep(1)
+                                  
+    post = Post.create("member_id" => member0.id, 
+                  "name" => member0.name,
+                  "image"=>"" , 
+                  "location" => [ 13.6708 , 100.2787],
+                  "message" => "มีฝนตก-ฟ้าร้อง",
+                  "place" => "3091", 
+                  "time" => Time.now.utc,
+                  "voted_down" => 0, 
+                  "voted_up" => 0,
+                  "water_height" => 0
+                ) 
+                
+
+
+    commit_database
+            
+    ScoreByArea.up
+    commit_database
+    
+    scores = ScorePerDay.all
+    scores.length.should == 2
+    
+    maxes = MaxScorePerDayPerArea.all
+    maxes.length.should == 1
+    
+    maxes[0].location_group[0].should == 13.66
+    maxes[0].location_group[1].should == 100.28
+    maxes[0].contribute_date.should == Date.parse(post.time.in_time_zone.strftime('%Y-%m-%d'))
+    maxes[0].score.should == 10
+    maxes[0].member_id.should == member1.id
+    
+    member0 = Member.find(member0.id)
+    member0.all_score.should == 1
+
+    member1 = Member.find(member1.id)
+    member1.all_score.should == 10
+
+  end
+
+end
