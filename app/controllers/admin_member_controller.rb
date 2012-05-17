@@ -2,6 +2,12 @@ class AdminMemberController < ApplicationController
   include AdminMemberHelper
   
   def index
+    params[:redirect_url] ||= "/admin_member"
+    if @member.is_guest or !@member.is_admin
+       render :template => 'home/login_required'
+      return
+    end
+    
     @pending_members = UnapproveMember.all()
   end
   
@@ -15,6 +21,12 @@ class AdminMemberController < ApplicationController
   end
   
   def set_admin
+    params[:redirect_url] ||= "/admin_member/set_admin"
+    if (@member.is_guest or !@member.is_admin) and !Rails.env.development?
+       render :template => 'home/login_required'
+      return
+    end
+    
     @members = Member.where(:is_admin=>false).entries
   end
   
@@ -29,6 +41,11 @@ class AdminMemberController < ApplicationController
   end
   
   def remove_admin
+    params[:redirect_url] ||= "/admin_member/remove_admin"
+    if @member.is_guest or !@member.is_admin
+       render :template => 'home/login_required'
+      return
+    end
     @admins = Member.where(:is_admin=>true).entries
   end
   
