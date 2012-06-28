@@ -34,8 +34,20 @@
 	%>
 </ul>
 <ul id="add_menu" style="display:none;">
-	<li><span class="next" onclick="global_flood.to_add_page();"></span></li>
-	<li><span class="cancel" onclick="global_flood.to_normal_mode();"></span></li>
+	<!--<li><span class="next" onclick="global_flood.to_add_page();"></span></li>
+	<li><span class="cancel" onclick="global_flood.to_normal_mode();"></span></li>-->
+	<li>
+		<span style="float:left; clear: both; margin-bottom: 10px;">
+			<span class="button green ss" onclick="global_flood.to_add_page();"><%=word_for :report_button%>
+			</span>
+		</span>
+	</li>
+	<li>
+		<span style="float:left; clear: both; margin-bottom: 10px;margin-left: 125px;">
+			<span class="button gray ss" onclick="global_flood.to_normal_mode();"><%=word_for :cancel_button%>
+			</span>
+		</span>
+	</li>
 </ul>
 <ul id="search_menu" style="display:none;">
 	<li><input id="search_address" type="text" placeholder="<%=word_for_attr :default_search_text%>"></li>
